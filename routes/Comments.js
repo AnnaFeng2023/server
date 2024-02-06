@@ -7,11 +7,13 @@ router.get("/:companyId", async (req, res) => {
   const companyId = req.params.companyId; // Use correct parameter name companyId
 
   try {
-    const comments = await Comments.findAll({ where: { CompanyID: companyId } });
+    const comments = await Comments.findAll({
+      where: { CompanyID: companyId },
+    });
     res.json(comments);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
@@ -21,19 +23,20 @@ router.post("/", validateToken, async (req, res) => {
 
     // Validate that required fields are present
     if (!CompanyID || !Rating || !Comment) {
-      return res.status(400).json({ error: 'Missing required fields' });
+      return res.status(400).json({ error: "Missing required fields" });
     }
 
     const createdComment = await Comments.create({
-      CompanyID,
-      Rating,
-      Comment,
+      CompanyID: CompanyID,
+      Rating: Rating,
+      Comment: Comment,
+      PostDate: new Date(),
     });
 
     res.status(201).json(createdComment);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 

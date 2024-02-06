@@ -10,8 +10,8 @@ const S3_BUCKET = "test-group6";
 const REGION = "us-east-2";
 
 AWS.config.update({
-  accessKeyId: process.env.ACCESSKEY_ID,
-  secretAccessKey: process.env.SECRET_AK,
+  accessKeyId: "AKIAYS2NQRCMGDJQVPXL",
+  secretAccessKey: "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",
   region: REGION,
 });
 

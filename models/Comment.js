@@ -5,6 +5,10 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
       primaryKey: true,
     },
+    CompanyID: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
     Rating: {
       type: DataTypes.INTEGER,
       allowNull: false,

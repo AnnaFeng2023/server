@@ -3,10 +3,9 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-
 app.use(express.json());
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = require("./models");
 
@@ -19,17 +18,18 @@ const usersRouter = require("./routes/Users");
 app.use("/auth", usersRouter);
 const commentsRouter = require("./routes/Comments");
 app.use("/comments", commentsRouter);
+const userRouter = require("./routes/SeekerProfile");
+app.use("/profile", userRouter);
 
 // insert
-app.post("/api/insert", (req, res) =>{
-  const firstName = req.body.firstName
-  const lastName = req.body.lastName
+app.post("/api/insert", (req, res) => {
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
 
   const sqlSelect = "INSERT INTO users (FirstName, LastName) VALUES(?,?)";
-  db.query(sqlSelect, [firstName, lastName], (err, result) =>{
+  db.query(sqlSelect, [firstName, lastName], (err, result) => {
     console.log(err);
   });
-
 });
 
 /*
